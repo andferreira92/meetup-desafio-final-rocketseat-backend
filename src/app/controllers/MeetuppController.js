@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import Meetupp from '../models/Meetupp';
 
 class MeetuppController {
-  async index(req, res) {
+  async store(req, res) {
     /**
      * validações com Yup
      */

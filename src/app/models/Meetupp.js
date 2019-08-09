@@ -21,6 +21,7 @@ class Meetupp extends Model {
    */
   static associate(models) {
     this.belongsTo(models.Banners, { foreignKey: 'banner_id' });
+    this.belongsTo(models.User, { foreignKey: 'user_id' });
   }
 }
 

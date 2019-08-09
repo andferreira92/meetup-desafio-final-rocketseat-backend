@@ -40,6 +40,12 @@ class UserController {
     });
   }
 
+  async index(req, res) {
+    const { id, name, email, avatar_id } = await User.findByPk(req.userId);
+
+    return res.json({ id, name, email, avatar_id });
+  }
+
   async update(req, res) {
     /**
      * validações com Yup
