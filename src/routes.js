@@ -5,6 +5,8 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
+import BannersController from './app/controllers/BannersController';
+import MeetuppController from './app/controllers/MeetuppController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -22,5 +24,8 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.post('/banner', upload.single('banner'), BannersController.store);
+
+routes.get('/meetupp', MeetuppController.index);
 
 export default routes;
