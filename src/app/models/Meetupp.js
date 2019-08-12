@@ -17,7 +17,7 @@ class Meetupp extends Model {
   }
 
   /**
-   * faz a associação do model de Meetupp com a tabela banners através do avatar_id
+   * faz a associação do model de Meetupp com a tabela banners através do banner_id
    */
   static associate(models) {
     this.belongsTo(models.Banners, { foreignKey: 'banner_id' });
