@@ -26,6 +26,8 @@ class User extends Model {
    * faz a associação do model de User com a tabela files através do avatar_id
    */
   static associate(models) {
+    this.hasMany(models.Meetupp);
+    this.hasMany(models.Subscription);
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 

@@ -1,3 +1,4 @@
+import { isBefore } from 'date-fns';
 import Sequelize, { Model } from 'sequelize';
 
 class Meetupp extends Model {
@@ -8,6 +9,12 @@ class Meetupp extends Model {
         description: Sequelize.STRING,
         location: Sequelize.STRING,
         date: Sequelize.DATE,
+        past: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return isBefore(this.date, new Date());
+          },
+        },
       },
       {
         sequelize,
@@ -17,9 +24,10 @@ class Meetupp extends Model {
   }
 
   /**
-   * faz a associação do model de Meetupp com a tabela banners através do banner_id
+   * faz a referência a chaves de outras tabelas
    */
   static associate(models) {
+    this.hasMany(models.Subscription, { foreignKey: 'meetup_id' });
     this.belongsTo(models.Banners, { foreignKey: 'banner_id' });
     this.belongsTo(models.User, { foreignKey: 'user_id' });
   }

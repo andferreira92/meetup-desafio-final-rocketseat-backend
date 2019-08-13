@@ -7,7 +7,10 @@ import Banners from '../models/Banners';
 
 class MeetuppController {
   async index(req, res) {
+    const { page } = req.query;
+
     const meetupps = await Meetupp.findAll({
+      where: { user_id: req.userId },
       order: ['date'],
       attributes: [
         'id',
@@ -17,6 +20,8 @@ class MeetuppController {
         'date',
         'banner_id',
       ],
+      limit: 20,
+      offset: (page - 1) * 20,
 
       include: [
         {

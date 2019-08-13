@@ -7,7 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import BannersController from './app/controllers/BannersController';
 import MeetuppController from './app/controllers/MeetuppController';
-
+import SubscriptionController from './app/controllers/SubscriptionController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -25,6 +25,8 @@ routes.put('/users', UserController.update);
 routes.get('/users', UserController.index);
 routes.post('/meetupp', MeetuppController.store);
 routes.get('/meetupp', MeetuppController.index);
+routes.get('/meetupp/inscription', SubscriptionController.index);
+routes.post('/meetupp/:meetupId/inscription', SubscriptionController.store);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/banner', upload.single('banner'), BannersController.store);
