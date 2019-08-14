@@ -25,6 +25,8 @@ routes.put('/users', UserController.update);
 routes.get('/users', UserController.index);
 routes.post('/meetupp', MeetuppController.store);
 routes.get('/meetupp', MeetuppController.index);
+routes.put('/meetupp/:id', MeetuppController.update);
+routes.delete('/meetupp/:id', MeetuppController.delete);
 routes.get('/meetupp/inscription', SubscriptionController.index);
 routes.post('/meetupp/:meetupId/inscription', SubscriptionController.store);
 

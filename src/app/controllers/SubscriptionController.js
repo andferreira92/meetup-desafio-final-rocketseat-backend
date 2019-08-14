@@ -1,10 +1,9 @@
 import { Op } from 'sequelize';
-
 import User from '../models/User';
-
 import Meetupp from '../models/Meetupp';
-
 import Subscription from '../models/Subscription';
+
+import Mail from '../../lib/Mail';
 
 class SubscriptionController {
   async index(req, res) {
@@ -92,6 +91,21 @@ class SubscriptionController {
       user_id: user.id,
 
       meetup_id: meetup.id,
+    });
+
+    /**
+     * pegar : nome do organizdor e email
+     * pegar : nome do inscrito no meetup
+     */
+    await Mail.sendMail({
+      to: `${user.name} <${user.email}>`,
+      subject: 'Nova Inscrição no seu meetup',
+      template: 'inscription',
+      context: {
+        meetup: meetup.title,
+        provider: meetup.User.name,
+        user: user.name,
+      },
     });
 
     return res.json(subscription);
