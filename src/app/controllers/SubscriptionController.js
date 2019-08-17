@@ -3,7 +3,8 @@ import User from '../models/User';
 import Meetupp from '../models/Meetupp';
 import Subscription from '../models/Subscription';
 
-import Mail from '../../lib/Mail';
+import InscriptionEmail from '../jobs/InscriptionMail';
+import Queue from '../../lib/Queue';
 
 class SubscriptionController {
   async index(req, res) {
@@ -93,19 +94,9 @@ class SubscriptionController {
       meetup_id: meetup.id,
     });
 
-    /**
-     * pegar : nome do organizdor e email
-     * pegar : nome do inscrito no meetup
-     */
-    await Mail.sendMail({
-      to: `${user.name} <${user.email}>`,
-      subject: 'Nova Inscrição no seu meetup',
-      template: 'inscription',
-      context: {
-        meetup: meetup.title,
-        provider: meetup.User.name,
-        user: user.name,
-      },
+    await Queue.add(InscriptionEmail.key, {
+      meetup,
+      user,
     });
 
     return res.json(subscription);

@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import BannersController from './app/controllers/BannersController';
 import MeetuppController from './app/controllers/MeetuppController';
+import ScheduleController from './app/controllers/ScheduleController';
 import SubscriptionController from './app/controllers/SubscriptionController';
 import authMiddleware from './app/middlewares/auth';
 
@@ -24,6 +25,7 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 routes.get('/users', UserController.index);
 routes.post('/meetupp', MeetuppController.store);
+routes.get('/creator', ScheduleController.index);
 routes.get('/meetupp', MeetuppController.index);
 routes.put('/meetupp/:id', MeetuppController.update);
 routes.delete('/meetupp/:id', MeetuppController.delete);
